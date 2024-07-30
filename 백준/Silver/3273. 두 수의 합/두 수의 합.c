@@ -13,7 +13,7 @@ int main()
         cnts[tmp]++;
     }
     scanf("%d", &x);
-    for(int i=0; i<=x/2; i++)
+    for(int i=0; i<=x; i++)
     {  
         if(cnts[i] && cnts[x-i])
         {
@@ -23,10 +23,10 @@ int main()
             }
             else
             {
-                s+= cnts[i]*cnts[x-i];
+                s++;
             }
         }
     }
-    printf("%d", s);
+    printf("%d", s/2);
     return 0;
 }
