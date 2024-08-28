@@ -1,37 +1,24 @@
 #include <iostream>
-#define MAX 1000000007
-
-using namespace std;
-using lld = long long;
-
-int main(){
-    lld d,n,m,k;
-    cin >> d >> n >> m >> k;
-    n%=d;
-    m%=d;
-    lld maxi = k/d, last = k%d;
-    if(n < m){ // 더 큰쪽을 n으로 가정함. 
-        lld tmp = m;
-        m = n;
-        n = tmp;
-    }
-    if(n + last >=  d){
-        last -= d-n;
-        if(m + last >= d){
-            last -= d-m;
+int main(){long d,n,m,k,a,l,tmp;scanf("%ld%ld%ld%ld",&d,&n,&m,&k);n%=d;m%=d;
+    a=k/d,l=k%d;
+    if(n<m)std::swap(n,m); 
+    if(n + l >=  d){
+        l -= d-n;
+        if(m + l >= d){
+            l -= d-m;
         }
-        cout << maxi * d + last;
+        printf("%ld",a * d + l);
     }    
-    else if(maxi > 0){
-        last+=d;
-        maxi--;
-        if(n + m + last >= 2*d){
-            last -= d-n + d-m;
+    else if(a > 0){
+        l+=d;
+        a--;
+        if(n + m + l >= 2*d){
+            l -= d-n + d-m;
         }
-        cout << maxi * d + last;
+        printf("%ld",a * d + l);
     }
     else{
-        cout << k;
+        printf("%ld",k);
     }
 
     return 0;
