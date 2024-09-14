@@ -1,0 +1,1 @@
+main(long long t){scanf("%lld",&t);printf("%lld",t==1?0:(t+1)/2);}
