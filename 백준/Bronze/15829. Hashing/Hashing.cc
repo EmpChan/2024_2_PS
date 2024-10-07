@@ -3,6 +3,14 @@
 
 using namespace std;
 
+long long mypow(int t,int tt){
+    long long k =1;
+    for(int i=0; i<tt; i++){
+        k= (k*31)%1234567891;
+    }
+    return k;
+}
+
 int main()
 {
     long long int wa = 0;
@@ -11,7 +19,9 @@ int main()
     cin >> n >> str;
     for (int i = 0; i < n; i++)
     {
-        wa = (wa+ ((long long)(str[i] - 'a' + 1)*(long long)pow(31,i)))%1234567891;
+        long long tmp = str[i] - 'a' + 1;
+        long long tmp2 = mypow(31,i);
+        wa = (wa+ (tmp*tmp2))%1234567891;
     }
     cout << wa % 1234567891;
 }
