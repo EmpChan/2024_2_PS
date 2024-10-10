@@ -1,53 +1,38 @@
 #include <iostream>
-#include <map>
-#include <set>
+#include <vector>
 
 using namespace std;
 
-map<int, set<int>> nums;
-bool visit[1001];
+vector<vector<int>>arr;
+vector<bool>visited;
 
-int main() {
-	ios::sync_with_stdio(0);
-	cout.tie(0);
-	cin.tie(0);
+void dfs(int t){
+    visited[t] = 1;
+    for(auto i : arr[t]){
+        if(visited[i])continue;
+        dfs(i);
+    }
+}
 
-	int n,m,c1=0;
-	cin >> n >> m;
+int main(){
+    int n,m, cnt = 0;
+    cin >> n >> m;
+    arr.resize(n+1);
+    visited.resize(n+1);
+    for(int i=0; i<m; i++){
+        int a,b;
+        cin >> a >> b;
+        arr[a].push_back(b);
+        arr[b].push_back(a);
+    }
 
-	for (int i = 0; i < m; i++) {
-		int a, b;
-		cin >> a >> b;
-		nums[a].insert(b);
-		nums[b].insert(a);
-	}
-	int arr[1000];
-	int temp[1000];
-	int j, k = 0;
+    for(int i=1; i<=n; i++){
+        if(visited[i])continue;
+        dfs(i);
+        cnt++;
+    }
 
-	for (int i = 1; i <= n; i++) {
-		if (visit[i])
-			continue;
-		c1++;
-		k = 1;
-		arr[0] = i;
-		while (k > 0) {
-			j = k;
-			k = 0;
-			for (int q = 0; q < j; q++) {
-				for (auto p : nums[arr[q]]) {
-					if (!visit[p]) {
-						temp[k++] = p;
-						visit[p] = 1;
-					}
-				}
-			}
-			for (int q = 0; q < k; q++) {
-				arr[q] = temp[q];
-			}
-		}
-	}
+    cout << cnt;
 
-	cout << c1;
-	return 0;
+    return 0;
 }
