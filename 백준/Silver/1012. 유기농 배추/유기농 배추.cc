@@ -1,60 +1,45 @@
 #include <stdio.h>
 
+int arr[51][51], cnt = 0, n, m;
 
-void sol(int x, int y);
-void in();
-void ser();
-int vet[50][50] = { 0 };
-int h, w;
-int T, k;
-int m, n;
-int cnt=0;
-int main() {
-   scanf("%d",&T);
-
-   for (int i = 0; i < T; i++) {
-      scanf("%d %d %d", &n, &m,&k);
-      in();
-      ser();
-      printf("%d\n", cnt);
-      cnt = 0;
-   }
-   return 0;
-
-}
-void in() {
-
-   for (int i = 0; i < k; i++) {
-      scanf("%d %d", &h, &w);
-      vet[h][w] = 1;
-   }
-   
+void dfs(int x, int y)
+{
+    int dx[4] = {0, 1, 0, -1}, dy[4] = {1, 0, -1, 0};
+    for (int i = 0; i < 4; i++)
+    {
+        int nx = dx[i] + x;
+        int ny = dy[i] + y;
+        if (ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
+        if(!arr[nx][ny])continue;
+        arr[nx][ny] = 0;
+        dfs(nx,ny);
+    }
 }
 
-void ser() {
-   for (int i = 0; i < n; i++) {
-      for (int j = 0; j < m; j++) {
-         if (vet[i][j] == 1) {
-            vet[i][j]=0;
-            sol(i, j);
-            cnt++;
-         }
-      }
-   }
-}
-
-void sol(int x,int y) {
-
-   int dx[] = { 1,0,-1,0 };
-   int dy[] = { 0,1,0,-1 };
-
-   for (int i = 0; i < 4; i++) {
-      int nx = dx[i] + x;
-      int ny = dy[i] + y;
-      if (nx < 0 || nx >= n || ny < 0 || ny >= m)continue;
-      if (vet[nx][ny] == 0)continue;
-      vet[nx][ny] = 0;
-      sol(nx, ny);
-   }
-
+int main()
+{
+    int t, k, x, y;
+    scanf("%d", &t);
+    for (int i = 0; i < t; i++)
+    {
+        scanf("%d %d %d", &m, &n, &k);
+        for (int j = 0; j < k; j++)
+        {
+            scanf("%d %d", &x, &y);
+            arr[x][y] = 1;
+        }
+        for (int j = 0; j < m; j++)
+        {
+            for (int h = 0; h < n; h++)
+            {
+                if (!arr[j][h])continue;
+                arr[j][h] = 0;
+                dfs(j, h);
+                cnt++;
+            }
+        }
+        printf("%d\n", cnt);
+        cnt = 0;
+    }
+    return 0;
 }
