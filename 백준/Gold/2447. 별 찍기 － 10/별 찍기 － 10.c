@@ -1,0 +1,2 @@
+int m[6561][6561],i,j,x[]={0,1,2,0,0,1,2,2},y[]={0,0,0,1,2,2,1,2};d(int q,int p,int w){if(w>1){for(int a=0;a<8;a++)d(x[a]*w/3+p,q+y[a]*w/3,w/3);}else m[p][q]=1;}
+main(n){scanf("%d",&n);d(0,0,n);for(i=0;i<n;i++){for(j=0;j<n;j++)printf("%c",m[i][j]?'*':' ');printf("\n");}}
