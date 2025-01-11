@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 1112 KB, 시간: 0 ms
+메모리: 32412 KB, 시간: 40 ms
 
 ### 분류
 
@@ -12,21 +12,21 @@
 
 ### 제출 일자
 
-2024년 12월 5일 21:25:01
+2025년 1월 11일 11:20:02
 
 ### 문제 설명
 
 <p>소떡소떡은 기다란 꼬치에 소세지와 떡을 끼운 음식이다. 편의상 소떡소떡을 알파벳 <code>s</code>와 <code>t</code>로만 구성된 길이 <mjx-container class="MathJax" jax="CHTML" style="font-size: 109%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D441 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi></math></mjx-assistive-mml><span aria-hidden="true" class="no-mathjax mjx-copytext">$N$</span></mjx-container>의 문자열로 생각하자. 알파벳 <code>s</code>는 소세지를, <code>t</code>는 떡을 의미한다.</p>
 
-<p style="text-align: center;"><img alt="" src=""></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/609c4d0e-99eb-4410-980d-4fe807e8b8cd/-/preview/"></p>
 
 <p>위 그림은 길이가 <mjx-container class="MathJax" jax="CHTML" style="font-size: 109%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c37"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>7</mn></math></mjx-assistive-mml><span aria-hidden="true" class="no-mathjax mjx-copytext">$7$</span></mjx-container>인 소떡소떡의 예시이다. 유진이는 소떡소떡을 먹기 전에 소떡소떡을 <em>팰린드롬 소떡소떡</em>으로 만들려고 한다. 팰린드롬이란, 앞에서부터 읽었을 때와 뒤에서부터 읽었을 때가 같은 문자열을 말한다. 예를 들어 <code>sts</code>, <code>tsst</code>, <code>tt</code>는 팰린드롬이다.</p>
 
-<p style="text-align: center;"><img alt="" src=""></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/6c2a5f1c-d548-46fe-94de-c7e32754536b/-/preview/"></p>
 
 <p>유진이는 특별한 마법을 사용해서 꼬치에 꽂힌 소세지 하나를 떡으로 바꾸거나, 반대로 떡 하나를 소세지로 바꿀 수 있다. 위 그림은 마법을 한 번 사용해서 떡 하나를 소세지로 바꾼 그림이다.</p>
 
-<p style="text-align: center;"><img alt="" src=""></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/d0d7f346-7cfc-423d-b514-9ed4530b31e4/-/preview/"></p>
 
 <p>위 그림은 마법을 한 번 더 사용해서 떡 하나를 소세지로 바꾼 그림이다. 이제 이 소떡소떡은 <em>팰린드롬 소떡소떡</em>이 되었다.</p>
 
