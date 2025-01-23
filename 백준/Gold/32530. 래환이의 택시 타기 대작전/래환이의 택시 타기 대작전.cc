@@ -1,39 +1,34 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 #include <algorithm>
 
 using namespace std;
 
-int timetomin(string a){
-    int h = 0;
-    int m = 0;
-    h = (a[0]-'0')*10 + (a[1]-'0');
-    m = (a[3]-'0')*10 + (a[4]-'0');
-    return h*60+m;
-}
-
 vector<int>v;
-vector<int>cnts;
+
+int calc_time(int a, int b){
+    return a*60+b;
+}
 
 int main(){
     int n;
-    int cnt = 0;
-    cin >> n;
+    scanf("%d", &n);
     for(int i=0; i<n; i++){
-        string a;
-        cin >> a;
-        v.push_back(timetomin(a));
+        int a, b;
+        scanf("%d:%d",&a,&b);
+        v.push_back(calc_time(a,b));
     }
     sort(v.begin(),v.end());
-    int i=0,j=0;
-    while(j<n){
-        cnt++;
-        while(j<n && v[j]-v[i] <=10){
+    int cnt = 0;
+    int i = 0 ;
+    while(i < n){
+        int j = 0;
+        while(i+j < n && j<3 && v[i+j]-v[i]<=20){
             j++;
         }
-        i=j;
+        cnt++;
+        i+=j;
     }
-    cout << cnt;
-
-    return 0;
+    printf("%d",cnt);
 }
