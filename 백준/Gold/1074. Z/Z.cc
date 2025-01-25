@@ -1,62 +1,32 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-long long count_it(int n, int r, int c)
-{
-	if (r < 2 && c < 2)
-	{
-		if (r == 0 && c == 0)
-			return 1;
-		else if (r == 0 && c == 1)
-			return 2;
-		else if (r == 1 && c == 0)
-			return 3;
-		else 
-			return 4;
-	}
-	long long count=0, k=2;
-	long long big_one=max(r,c), small_one = min(r, c);
-	while (k - 1 < big_one)
-	{
-		k *= 2;
-	}
-	if (small_one > k / 2-1)
-	{
-		count = k * k * 3 / 4;
-		k /= 2;
-		r -= k;
-		c -= k;
-	}
-	else
-	{
-		if (small_one == r)
-		{
-			count = k * k / 4;
-			k /= 2;
-			c -= k;
-		}
-		else
-		{
-			count = k * k / 2;
-			k /= 2;
-			r -= k;
-		}
-	}
-	return count + count_it(n, r, c);
+int count_it(int sx,int sy){
+    if(sx <= 1  && sy<=1){
+        return sx*2+sy;
+    }
+    int wx = 1;
+    int wy = 1;
+    while(wx*2 <= sx)wx*=2;
+    while(wy*2 <= sy)wy*=2;
+    if(wx == wy){ // 4사분면
+        return count_it(sx-wx, sy-wy) + (wx*wx)*3;
+    }
+    else if (wx < wy){ // 2사분면
+        return count_it(sx,sy - wy ) + (wy*wy);
+    }
+    else { // 3사분면
+        return count_it(sx-wx,sy) + wx*wx*2;
+    }
 }
 
-int main()
-{
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	int n, r, c;
-	cin >> n;
-	cin >> r;
-	cin >> c;
+int main(){
+    int n,r,c;
+    cin >> n >> r >> c;
 
-	cout << count_it(n, r, c)-1;
+    cout << count_it(r,c);
 
-	return 0;
+    return 0;
 }
