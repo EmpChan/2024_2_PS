@@ -1,72 +1,69 @@
-#include <stdio.h>
-#include <malloc.h>
+#include<stdio.h>
+#include<malloc.h>
+struct Heap {
+   int* item;
+   int size;
+};
 
-int arr[300001], size = 0;
-
-void insert(int item)
-{
-    arr[++size] = item;
-    int p = size;
-    while (p>1 && arr[p] > arr[p/2])
-    {
-        int tmp = arr[p];
-        arr[p] = arr[p/2];
-        arr[p/2] = tmp;
-        p /= 2;
-    }
-
+struct Heap* newheap(int size) {
+   struct Heap* heap = (struct Heap*)malloc(sizeof(struct Heap));
+   heap->size = 0;
+   heap->item = (int*)malloc(sizeof(int) * size);
+   return heap;
 }
 
-void delete()
-{
-    if (size == 0)
-    {
-        printf("0\n");
-        return;
-    }
-    printf("%d\n", arr[1]);
-    arr[1] = arr[size--];
-    int p = 1;
-    while (p*2<=size || p*2+1<=size)
-    {
-        if (p*2+1<=size && arr[p*2] < arr[p*2+1])
-        {
-            if(arr[p*2+1] > arr[p]) {
-                int tmp = arr[p*2+1];
-                arr[p*2+1] = arr[p];
-                arr[p] = tmp;
-                p=p*2+1;
-            }
-            else break;
-        }
-        else
-        {
-            if (arr[p*2] > arr[p])
-            {
-                int tmp = arr[p];
-                arr[p] = arr[p*2];
-                arr[p*2] = tmp;
-                p=p*2;
-            }
-            else break;
-        }
-    }
+void insert(struct Heap* h,int num) {
+   h->item[++h->size] = num;
+   int p = h->size;
+   while (p > 1 && h->item[p] > h->item[p / 2]) {
+      int tmp = h->item[p];
+      h->item[p] = h->item[p / 2];
+      h->item[p / 2] = tmp;
+      p /= 2;
+   }
 }
-
-int main(){
-    int n, yaho;
-    scanf("%d", &n);
-    for (int i = 0; i < n; i++)
-    {
-        scanf("%d", &yaho);
-        if (yaho == 0)
-        {
-            delete();
-        }
-        else
-        {
-            insert(yaho);
-        }
-    }
-    return 0;
+void delete(struct Heap* h) {
+   if(h->size ==0){
+      printf("0\n");
+      return;
+   }
+   printf("%d\n", h->item[1]);
+   h->item[1] = h->item[h->size];
+   h->size--;
+   int p = 1;
+   while (p * 2 <= h->size || p * 2 + 1 <= h->size) {
+      if (p * 2 + 1 <= h->size && h->item[p * 2 + 1] > h->item[p * 2]) {
+         if (h->item[p] < h->item[p * 2 + 1]) {
+            int tmp = h->item[p];
+            h->item[p] = h->item[p * 2 + 1];
+            h->item[p * 2 + 1] = tmp;
+            p = p * 2 + 1;
+         }
+         else break;
+      }
+      else {
+         if (h->item[p] < h->item[p * 2]) {
+            int tmp = h->item[p];
+            h->item[p] = h->item[p * 2];
+            h->item[p * 2] = tmp;
+            p = p * 2;
+         }
+         else break;
+      }
+   }
+}
+int main() {
+   int n, m;
+   scanf("%d", &n);
+   struct Heap* h = newheap(n);
+   for (int i = 0; i < n; i++) {
+      scanf("%d", &m);
+      if (m == 0) {
+         delete(h);
+      }
+      else {
+         insert(h, m);
+      }
+   }
+   return 0;
 }
