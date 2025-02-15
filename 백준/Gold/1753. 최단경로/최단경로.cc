@@ -1,49 +1,54 @@
 #include <iostream>
-#include <queue>
 #include <vector>
-#include <utility>
-
-#define INF 2000000
+#include <queue>
+#define MAX 2000000007
 
 using namespace std;
 
-vector<pair<int, int>>dots[20001];
-int dist[20001];
+vector<vector<pair<int,int>>>edge(20001);
+vector<int>dist(20001,MAX);
+priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+    
+void dikstra(int r){
+    dist[r] = 0;
+    for(auto i : edge[r]){
+        pq.push(i);
+        dist[i.second] = min(dist[i.second], i.first);
+    }
 
-void sol(int n, int m, int v) {
-	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>pq;
-	pq.push(make_pair(0, v));
-	dist[v] = 0;
-	while (!pq.empty()) {
-		int d = pq.top().first;
-		int p = pq.top().second;
-		pq.pop();
-		for (auto i : dots[p]) {
-			int linkd = d+i.first;
-			int linkp = i.second;
-			if (dist[linkp] > linkd) {
-				dist[linkp] = linkd;
-				pq.push(make_pair(linkd,linkp));
-			}
-		}
-	}
+    while(!pq.empty()){
+        int w = pq.top().first, d = pq.top().second;
+        pq.pop();
+
+        if(dist[d] < w)continue;
+
+        for(auto i : edge[d]){
+            int nw = w+i.first;
+            int nd = i.second;
+            if(dist[nd] <= nw)continue;
+            dist[nd]= nw;
+            pq.push({nw,nd});
+        }
+    }
+
 }
 
-int main() {
-	ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-	int n, m, v;
-	cin >> n >> m >> v;
-	for (int i = 1; i <= 20000; i++) dist[i] = INF;
-	for (int i = 0; i < m; i++) {
-		int a, b, c;
-		cin >> a >> b >> c;
-		dots[a].push_back(make_pair(c, b));
-	}
-	sol(n,m,v);
-	for (int i = 1; i <= n; i++) {
-		if (dist[i] == INF) cout << "INF\n";
-		else cout << dist[i] << '\n';
-	}
+int main(){
+    ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 
-	return 0;
+    int v,e,s,a,b,c;
+    cin >> v >> e >> s;
+    while(e--){
+        cin >> a >> b >> c;
+        edge[a].push_back({c,b});
+    }
+    dikstra(s);
+    for(int i=1; i<=v; i++){
+        if(dist[i] == MAX){
+            cout << "INF\n";
+        }
+        else cout << dist[i] << '\n';
+    }
+
+    return 0;
 }
